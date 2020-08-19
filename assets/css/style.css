@@ -1,0 +1,144 @@
+#app {
+  margin-top: 20px;
+}
+#app .competitors {
+  display: flex;
+}
+#app .competitors .competitor-human {
+  width: 50%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#app .competitors .competitor-human .human-title {
+  font-size: 30px;
+  font-weight: 700;
+}
+#app .competitors .competitor-human .human-health {
+  background-color: lightgray;
+  width: 85%;
+  height: 40px;
+  margin-top: 15px;
+  border-radius: 5px;
+}
+
+#app .competitors .competitor-human .human-health .health-info {
+  /* width: 90%; */
+  height: 40px;
+  border-radius: 5px;
+  background-color: green;
+}
+#app .competitors .competitor-human .human-health .health-info span {
+  color: greenyellow;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 35px;
+}
+
+#app .competitors .competitor-monster {
+  width: 50%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#app .competitors .competitor-monster .monster-title {
+  font-size: 30px;
+  font-weight: 700;
+}
+#app .competitors .competitor-monster .monster-health {
+  background-color: lightgray;
+  width: 85%;
+  height: 40px;
+  margin-top: 15px;
+  border-radius: 5px;
+}
+
+#app .competitors .competitor-monster .monster-health .health-info {
+  /* width: 70%; */
+  height: 40px;
+  border-radius: 5px;
+  background-color: green;
+}
+#app .competitors .competitor-monster .monster-health .health-info span {
+  color: greenyellow;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 35px;
+}
+
+#app .attack-bar {
+  width: 100%;
+  margin-top: 30px;
+  -webkit-box-shadow: 0px 5px 12px 3px rgba(0, 0, 0, 0.48);
+  -moz-box-shadow: 0px 5px 12px 3px rgba(0, 0, 0, 0.48);
+  box-shadow: 0px 5px 12px 3px rgba(0, 0, 0, 0.48);
+}
+
+#app .attack-bar .attack-bar-wrapper {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+#app .attack-bar .attack-bar-wrapper .attack-item {
+  margin: 15px;
+}
+#app .attack-bar .attack-bar-wrapper .attack-item button {
+  line-height: 30px;
+  padding-right: 25px;
+  padding-left: 25px;
+}
+
+#app .game-logs {
+  width: 100%;
+  margin-top: 30px;
+  -webkit-box-shadow: 0px 5px 12px 3px rgba(0, 0, 0, 0.48);
+  -moz-box-shadow: 0px 5px 12px 3px rgba(0, 0, 0, 0.48);
+  box-shadow: 0px 5px 12px 3px rgba(0, 0, 0, 0.48);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 15px;
+  min-height: 300px;
+}
+
+#app .game-logs .a-round {
+  width: 80%;
+  /* background-color: lightblue; */
+  margin-top: 15px;
+  position: relative;
+}
+
+#app .game-logs .a-round .human-attack {
+  background: lightblue;
+  text-align: center;
+  font-size: 20px;
+  border-radius: 2px;
+}
+
+#app .game-logs .a-round .human-special-attack {
+  background: #ffc107;
+  text-align: center;
+  font-size: 20px;
+  border-radius: 2px;
+}
+#app .game-logs .a-round .human-health-vaccine {
+  background: lightgreen;
+  text-align: center;
+  font-size: 20px;
+  border-radius: 2px;
+}
+
+#app .game-logs .a-round .monster-attack {
+  background: lightcoral;
+  text-align: center;
+  font-size: 20px;
+  border-radius: 2px;
+  margin-top: 1px;
+}
+.top {
+  pointer-events: none;
+  opacity: 0.5;
+  background: #ccc;
+}

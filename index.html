@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Human vs Monster</title>
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script src="assets/js/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <div class="container">
+            <div class="war-game-wrapper">
+                <div id="top-menu" :class="{top:!gameStatus}">
+                    <div class="competitors">
+                        <div class="competitor-human">
+                            <div class="human-title">YOU</div>
+                            <div class="human-health">
+                                <div class="health-info" :style="{width:human.health+'%'}">
+                                    <span>%{{human.health}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="competitor-monster">
+                            <div class="monster-title">MONSTER</div>
+                            <div class="monster-health" >
+                                <div class="health-info" :style="{width:monster.health+'%'}">
+                                    <span>%{{monster.health}}</span>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="attack-bar">
+                        <div class="attack-bar-wrapper">
+                            <div class="attack attack-item">
+                                <button @click="attackRound(0)" class="btn btn-secondary" data-toggle="tooltip"
+                                data-trigger="hover" data-placement="bottom" title="Range of Attack: 6-16"> <b>ATTACK (∞)</b></button>
+                            </div>
+                            <div class="special-attack attack-item">
+                                <button :disabled="specialAttack <= 0" @click="attackRound(1)" class="btn btn-warning"
+                                data-trigger="hover"   data-toggle="tooltip" data-placement="bottom"
+                                    title="Range of Attack: 10-20"><b>SPECIAL ATTACK ({{specialAttack}}/3)</b></button>
+                            </div>
+                            <div class="health-vaccine attack-item">
+                                <button :disabled="healthVaccine <= 0" @click="attackRound(2)" class="btn btn-success"
+                                data-trigger="hover"    data-toggle="tooltip" data-placement="bottom"
+                                    title="Range of Health: 7-20"><b>HEALTH VACCINE ({{healthVaccine}}/1)</b></button>
+                            </div>
+                            <div class="surrender attack-item">
+                                <button @click="attackRound(3)" class="btn btn-danger"><b>SURRENDER!</b></button></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="game-logs">
+                    <button v-show="!gameStatus" @click="gameStatus=!gameStatus"
+                        class="btn btn-dark mt-5" style="padding: 15px 50px; font-size: 25px;"><b>Start Game</b></button>
+                    <div class="a-round" v-for="round in rounds">
+                        <div class="round-human">
+                            <div v-show="round.humanRoundType===0" class="human-attack">
+                                Your Attack ({{round.humanTypeValue}})
+                            </div>
+                            <div v-show="round.humanRoundType===1" class="human-special-attack">
+                                Your Special Attack ({{round.humanTypeValue}})
+                            </div>
+                            <div v-show="round.humanRoundType===2" class="human-health-vaccine">
+                                Your Health +({{round.humanTypeValue}})
+                            </div>
+                        </div>
+                        <div class="round-monster">
+                            <div class="monster-attack">
+                                Monster Attack ({{round.monsterAttackValue}})
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Modal lose-->
+        <div class="modal fade" id="loseModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content bg-danger" style="color: white !important;">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">YOU LOST!</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        You can try again.
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal victory -->
+        <div class="modal fade" id="victoryModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content bg-success" style="color: white !important;">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">VICTORY!</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        Congratulations, you won.
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal victory -->
+        <div class="modal fade" id="scorelessModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content bg-light" style="color: black !important;">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Scorless!</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        The game ended in a draw.
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+    <script src="assets/js/jquery-3.5.1.min.js"></script>
+    <script src="assets/js/popper.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/app.js"></script>
+</body>
+
+</html>
